@@ -10,7 +10,13 @@ export default defineConfig({
   },
   preview: {
     port: parseInt(process.env.PORT) || 4173,
-    host: '0.0.0.0'
+    host: '0.0.0.0',
+    allowedHosts: [
+      'to-do-board-frontend.onrender.com',
+      'localhost',
+      '127.0.0.1',
+      '0.0.0.0'
+    ]
   },
   build: {
     outDir: 'dist',
