@@ -2,6 +2,11 @@
 
 A modern, real-time collaborative task management application built with the MERN stack. This application allows multiple users to create, manage, and track tasks in real-time with a beautiful Kanban-style interface.
 
+## 🌐 Live Demo
+
+- **🚀 Live Application**: [https://to-do-board-frontend.onrender.com](https://to-do-board-frontend.onrender.com)
+- **🎥 Demo Video**: [Watch on YouTube](https://www.youtube.com/watch?v=b8FU9pfbzPk)
+
 ## 🌟 Features
 
 ### ✨ Core Functionality
@@ -49,55 +54,26 @@ A modern, real-time collaborative task management application built with the MER
 ## 📦 Installation & Setup
 
 ### Prerequisites
-- Node.js (v14 or higher)
+- Node.js (v16 or higher)
 - MongoDB (local installation or MongoDB Atlas)
-- npm or yarn package manager
+- npm package manager
 
 ### Backend Setup
-
-1. **Navigate to Backend Directory**
-   ```bash
-   cd Backend
-   ```
-
-2. **Install Dependencies**
-   ```bash
-   npm install bcryptjs cors jsonwebtoken socket.io
-   ```
-
-3. **Environment Configuration**
-   - The `.env` file is already configured
-   - Update `MONGODB_URI` if using a different MongoDB connection
-   - Change `JWT_SECRET` for production
-
-4. **Start the Backend Server**
-   ```bash
-   npm run dev
-   ```
-   The backend will run on `http://localhost:5000`
+1. Navigate to Backend directory: `cd Backend`
+2. Install dependencies: `npm install`
+3. Create `.env` file with your MongoDB URI and JWT secret
+4. Start development server: `npm run dev`
+5. Backend runs on `http://localhost:5000`
 
 ### Frontend Setup
-
-1. **Navigate to Frontend Directory**
-   ```bash
-   cd Frontend
-   ```
-
-2. **Install Dependencies**
-   ```bash
-   npm install react-router-dom socket.io-client axios react-beautiful-dnd
-   ```
-
-3. **Start the Frontend Development Server**
-   ```bash
-   npm run dev
-   ```
-   The frontend will run on `http://localhost:5173`
+1. Navigate to Frontend directory: `cd Frontend`
+2. Install dependencies: `npm install`
+3. Start development server: `npm run dev`
+4. Frontend runs on `http://localhost:5173`
 
 ### Database Setup
-- Ensure MongoDB is running locally on port 27017
-- The application will automatically create the `todoboard` database
-- No manual database setup required
+- MongoDB will automatically create the `todoboard` database
+- No manual database configuration required
 
 ## 🎯 Usage Guide
 
@@ -108,172 +84,37 @@ A modern, real-time collaborative task management application built with the MER
 4. **Smart Assign**: Use the 🎯 button to automatically assign tasks
 5. **Activity Log**: Toggle the activity panel to see real-time updates
 
-### Key Features Usage
+## 🧠 Smart Assign Logic
 
-#### Smart Assign Logic
-The Smart Assign feature automatically assigns tasks to the user with the fewest active tasks (Todo + In Progress). This ensures balanced workload distribution across team members.
+The Smart Assign feature automatically distributes tasks to balance workload across team members:
 
-**How it works:**
-1. Click the 🎯 Smart Assign button on any task
-2. System calculates active task count for each user
-3. Task is automatically assigned to user with lowest count
-4. Activity is logged for transparency
-
-#### Conflict Handling
-When multiple users edit the same task simultaneously:
-
-1. **Detection**: System detects version conflicts
-2. **Prevention**: Users are warned if someone else is editing
-3. **Resolution**: Conflicting users see current state and can choose to:
-   - Cancel their changes
-   - Reload and try again with latest data
-
-**Example Scenario:**
-- User A starts editing Task #1
-- User B tries to edit the same task
-- User B sees: "Task is currently being edited by User A"
-- If both submit changes, version conflict is detected
-- Both users get resolution options
-
-#### Real-time Features
-- **Live Updates**: See task changes instantly
-- **User Awareness**: Know when others are editing
-- **Activity Feed**: Real-time log of all actions
-- **Status Sync**: Drag-drop changes sync immediately
-
-## 🔧 API Endpoints
-
-### Authentication
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/login` - User login
-- `GET /api/auth/me` - Get current user
-- `GET /api/auth/users` - Get all users
-
-### Tasks
-- `GET /api/tasks` - Get all tasks
-- `POST /api/tasks` - Create new task
-- `PUT /api/tasks/:id` - Update task
-- `DELETE /api/tasks/:id` - Delete task
-- `POST /api/tasks/:id/smart-assign` - Smart assign task
-- `POST /api/tasks/:id/start-edit` - Start editing (conflict detection)
-- `POST /api/tasks/:id/stop-edit` - Stop editing
-
-### Activity
-- `GET /api/activity` - Get recent activities
-- `GET /api/activity/task/:taskId` - Get task-specific activities
-
-#### Backend Setup
-1. **Navigate to Backend Directory**
-   ```bash
-   cd Backend
-   ```
-
-2. **Install Dependencies**
-   ```bash
-   npm install
-   ```
-
-   ```
-
-4. **Start the Backend Server**
-   ```bash
-   npm run dev
-   ```
-
-#### Frontend Setup
-1. **Navigate to Frontend Directory**
-   ```bash
-   cd Frontend
-   ```
-
-2. **Install Dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Environment Configuration**
-   The `.env.local` file is configured for local development.
-   For production builds, `.env.production` contains production URLs.
-
-4. **Start the Frontend Development Server**
-   ```bash
-   npm run dev
-   ```
-
-### Dual Environment Support
-The application automatically detects whether it's running in development or production mode:
-
-- **Local Development**: Uses `localhost` URLs for API and Socket connections
-- **Production**: Uses Render deployment URLs
-- **Build Commands**: 
-  - `npm run dev` - Local development
-  - `npm run build` - Production build
-  - `npm run build:local` - Local build for testing
-
-## 🎬 Demo Video
-
-*[Video will be created and linked here]*
-
-The demo video showcases:
-- User registration and login
-- Real-time task creation and management
-- Drag-and-drop functionality
-- Smart assign feature
-- Conflict resolution in action
-- Activity logging
-- Mobile responsiveness
-
-## 📝 Logic Document
-
-### Smart Assign Implementation
-
-The Smart Assign feature distributes workload fairly across team members by:
-
-1. **Counting Active Tasks**: For each user, count tasks in "Todo" and "In Progress" status
-2. **Finding Minimum**: Identify user(s) with the lowest active task count
-3. **Assignment**: Assign the task to the first user with minimum tasks
-4. **Update Counters**: Increment the assigned user's active task count
-5. **Logging**: Record the smart assignment action with details
+**Algorithm:**
+1. Counts active tasks (Todo + In Progress) for each user
+2. Assigns new task to user with fewest active tasks
+3. Ensures fair workload distribution
+4. Logs assignment activity for transparency
 
 **Benefits:**
-- Prevents task overload on specific users
-- Ensures fair distribution of work
-- Saves time on manual assignment decisions
-- Provides transparency through activity logging
+- Prevents task overload on individual users
+- Automated workload balancing
+- Transparent assignment tracking
 
-### Conflict Handling System
+## ⚡ Conflict Handling System
 
-The conflict detection and resolution system works through:
+Real-time conflict detection and resolution for simultaneous editing:
 
-1. **Version Tracking**: Each task has a version number that increments on updates
-2. **Edit Locking**: When a user starts editing, the task is marked as "being edited"
-3. **Conflict Detection**: Before saving, system checks if version has changed
-4. **User Notification**: Conflicting users are presented with current state
-5. **Resolution Options**: Users can choose to cancel or retry with latest data
+**How it works:**
+1. **Edit Locking**: Users see when others are editing the same task
+2. **Version Control**: System tracks task versions to detect conflicts
+3. **Smart Resolution**: Users get current state and can choose to cancel or retry
+4. **Data Integrity**: Prevents data loss through atomic updates
 
-**Conflict Types Handled:**
-- Simultaneous editing (edit locking)
-- Version conflicts (data divergence)
-- Race conditions (atomic updates)
+**Example:**
+- User A starts editing a task
+- User B sees "Task currently being edited by User A"
+- If both submit changes, conflict modal shows latest data
+- Users can make informed decisions to prevent data loss
 
-**Resolution Strategies:**
-- Show current task state to users
-- Allow informed decision making
-- Prevent data loss through warnings
-- Maintain data integrity through version control
+---
 
-## 🤝 Contributing
-
-This project was built as an assignment demonstration. For educational purposes, feel free to:
-- Fork the repository
-- Experiment with new features
-- Improve the UI/UX
-- Add additional functionality
-
-## 📄 License
-
-This project is created for educational purposes as part of a coding assignment.
-
-
-
-Built with ❤️ using the MERN Stack
+**Built with ❤️ using the MERN Stack**
