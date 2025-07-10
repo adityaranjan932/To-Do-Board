@@ -19,8 +19,14 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000';
-      const newSocket = io(SOCKET_URL);
+      const isDevelopment = import.meta.env.MODE === 'development';
+      const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || 
+        (isDevelopment ? 'http://localhost:5000' : 'https://to-do-board-ok8u.onrender.com');
+      
+      const newSocket = io(SOCKET_URL, {
+        withCredentials: true,
+        autoConnect: true
+      });
 
       newSocket.on('connect', () => {
         console.log('Connected to server');

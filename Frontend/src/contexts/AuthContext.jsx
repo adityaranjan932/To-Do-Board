@@ -15,9 +15,13 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Set up axios defaults
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+  // Set up axios defaults with environment-based URL
+  const isDevelopment = import.meta.env.MODE === 'development';
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 
+    (isDevelopment ? 'http://localhost:5000/api' : 'https://to-do-board-ok8u.onrender.com/api');
+  
   axios.defaults.baseURL = API_BASE_URL;
+  axios.defaults.withCredentials = true;
 
   // Set up axios interceptor for token
   useEffect(() => {

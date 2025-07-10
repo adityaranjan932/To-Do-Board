@@ -11,15 +11,29 @@ dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
+// Environment-based CORS configuration
+const allowedOrigins = process.env.NODE_ENV === 'production' 
+  ? [
+      'https://to-do-board-frontend.onrender.com',
+      process.env.FRONTEND_URL
+    ].filter(Boolean)
+  : ['http://localhost:5173', 'http://localhost:3000'];
+
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:5173", // Vite default port
-    methods: ["GET", "POST"]
+    origin: allowedOrigins,
+    methods: ["GET", "POST"],
+    credentials: true
   }
 });
 
 // Middleware
-app.use(cors());
+const corsOptions = {
+  origin: allowedOrigins,
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Connect to MongoDB

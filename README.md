@@ -164,28 +164,92 @@ When multiple users edit the same task simultaneously:
 
 ## 🌐 Deployment
 
-### Frontend Deployment (Vercel/Netlify)
-1. Build the frontend: `npm run build`
-2. Deploy the `dist` folder to your hosting service
-3. Update environment variables for production URLs
+### Live Application
+- **Frontend**: [https://to-do-board-frontend.onrender.com](https://to-do-board-frontend.onrender.com)
+- **Backend**: [https://to-do-board-ok8u.onrender.com](https://to-do-board-ok8u.onrender.com)
 
-### Backend Deployment (Render/Railway/Heroku)
-1. Ensure all dependencies are in `package.json`
-2. Set environment variables in your hosting service
-3. Update CORS settings for your frontend domain
+### Frontend Deployment (Render)
+1. **Root Directory**: `Frontend`
+2. **Build Command**: `npm install && npm run build`
+3. **Start Command**: `npm run preview`
+4. **Environment Variables**:
+   ```env
+   VITE_API_BASE_URL=https://to-do-board-ok8u.onrender.com/api
+   VITE_SOCKET_URL=https://to-do-board-ok8u.onrender.com
+   NODE_ENV=production
+   ```
 
-### Environment Variables for Production
-```env
-# Backend
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_super_secure_jwt_secret
-PORT=5000
-FRONTEND_URL=https://your-frontend-domain.com
+### Backend Deployment (Render)
+1. **Root Directory**: `Backend`
+2. **Build Command**: `npm install`
+3. **Start Command**: `npm start`
+4. **Environment Variables**:
+   ```env
+   MONGODB_URI=your_mongodb_atlas_connection
+   JWT_SECRET=your_secure_jwt_secret
+   NODE_ENV=production
+   FRONTEND_URL=https://to-do-board-frontend.onrender.com
+   PORT=5000
+   ```
 
-# Frontend
-VITE_API_BASE_URL=https://your-backend-domain.com/api
-VITE_SOCKET_URL=https://your-backend-domain.com
-```
+### Local Development Setup
+### Local Development Setup
+
+#### Backend Setup
+1. **Navigate to Backend Directory**
+   ```bash
+   cd Backend
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Environment Configuration**
+   Create a `.env` file:
+   ```env
+   MONGODB_URI=mongodb://localhost:27017/todoboard
+   JWT_SECRET=your_jwt_secret_here
+   PORT=5000
+   NODE_ENV=development
+   FRONTEND_URL=http://localhost:5173
+   ```
+
+4. **Start the Backend Server**
+   ```bash
+   npm run dev
+   ```
+
+#### Frontend Setup
+1. **Navigate to Frontend Directory**
+   ```bash
+   cd Frontend
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Environment Configuration**
+   The `.env.local` file is configured for local development.
+   For production builds, `.env.production` contains production URLs.
+
+4. **Start the Frontend Development Server**
+   ```bash
+   npm run dev
+   ```
+
+### Dual Environment Support
+The application automatically detects whether it's running in development or production mode:
+
+- **Local Development**: Uses `localhost` URLs for API and Socket connections
+- **Production**: Uses Render deployment URLs
+- **Build Commands**: 
+  - `npm run dev` - Local development
+  - `npm run build` - Production build
+  - `npm run build:local` - Local build for testing
 
 ## 🎬 Demo Video
 
