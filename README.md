@@ -162,39 +162,6 @@ When multiple users edit the same task simultaneously:
 - `GET /api/activity` - Get recent activities
 - `GET /api/activity/task/:taskId` - Get task-specific activities
 
-## 🌐 Deployment
-
-### Live Application
-- **Frontend**: [https://to-do-board-frontend.onrender.com](https://to-do-board-frontend.onrender.com)
-- **Backend**: [https://to-do-board-ok8u.onrender.com](https://to-do-board-ok8u.onrender.com)
-
-### Frontend Deployment (Render)
-1. **Root Directory**: `Frontend`
-2. **Build Command**: `npm install && npm run build`
-3. **Start Command**: `npm run preview`
-4. **Environment Variables**:
-   ```env
-   VITE_API_BASE_URL=https://to-do-board-ok8u.onrender.com/api
-   VITE_SOCKET_URL=https://to-do-board-ok8u.onrender.com
-   NODE_ENV=production
-   ```
-
-### Backend Deployment (Render)
-1. **Root Directory**: `Backend`
-2. **Build Command**: `npm install`
-3. **Start Command**: `npm start`
-4. **Environment Variables**:
-   ```env
-   MONGODB_URI=your_mongodb_atlas_connection
-   JWT_SECRET=your_secure_jwt_secret
-   NODE_ENV=production
-   FRONTEND_URL=https://to-do-board-frontend.onrender.com
-   PORT=5000
-   ```
-
-### Local Development Setup
-### Local Development Setup
-
 #### Backend Setup
 1. **Navigate to Backend Directory**
    ```bash
@@ -206,14 +173,6 @@ When multiple users edit the same task simultaneously:
    npm install
    ```
 
-3. **Environment Configuration**
-   Create a `.env` file:
-   ```env
-   MONGODB_URI=mongodb://localhost:27017/todoboard
-   JWT_SECRET=your_jwt_secret_here
-   PORT=5000
-   NODE_ENV=development
-   FRONTEND_URL=http://localhost:5173
    ```
 
 4. **Start the Backend Server**
